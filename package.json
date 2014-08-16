@@ -13,5 +13,21 @@
     "body-parser": "~1.0.0",
     "debug": "~0.7.4",
     "jade": "~1.3.0"
-  }
+  },
+  "description": "A small forum-like module for students and teachers.",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HackNits/terminus-sim.git"
+  },
+  "keywords": [
+    "forum"
+  ],
+  "author": "Kevin Isaac",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HackNits/terminus-sim/issues"
+  },
+  "homepage": "https://github.com/HackNits/terminus-sim"
 }

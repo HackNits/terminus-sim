@@ -1,4 +1,11 @@
 extends layout
 
 block body
-  p Login here
+  form(action='', method='post')
+    | Register number  
+    input(type='text', name='reg_no')
+    br
+    | Password  
+    input(type='password', name='password')
+    br
+    input(type='submit', value='login')

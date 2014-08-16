@@ -1,4 +1,19 @@
 extends layout
 
 block body
-  p Register here
+  form(action='', method='post')
+    | Register number  
+    input(type='text', name='reg_no')
+    br
+    br
+    | Password  
+    input(type='password', name='password')
+    br
+    br
+    | You are a  
+    select(name='type')
+      option(value='student') Student
+      option(value='faculty') Faculty
+    br
+    br
+    input(type='submit', value='register')
