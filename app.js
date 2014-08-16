@@ -9,15 +9,22 @@ app.set('view engine', 'jade');
 app.set('views', './views');
 
 // MySQL
-/*
-    var mysql = require('mysql');
-    var connection = mysql.createConnection({
-        host: config.db_host,
-        user: config.db_user,
-        password: config.db_pass,
-        database: config.db
-    });
-*/
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+    host: config.db_host,
+    user: config.db_user,
+    password: config.db_pass,
+    database: config.db
+});
+connection.connect();
+
+connection.query('SELECT 1', function(err, rows, fields) {
+    if(err) {
+        throw err;
+    }
+    console.log(rows);
+});
+
 // Load the route handlers
 // var routers = require('./routes');
 var home = require('./routes/home');
@@ -48,3 +55,6 @@ console.log(config.db_host);
 console.log(config.db_user);
 console.log(config.db_pass);
 console.log(config.db);
+
+// Close mysql connection
+connection.end();
