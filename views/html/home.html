@@ -1,0 +1,114 @@
+<!--
+
+Posts - list
+-------------
+posts[0].User.id
+posts[0].User.username
+posts[0].User.register_number
+posts[0].User.email
+posts[0].User.kemail
+
+posts[0].ForumPost.title
+posts[0].ForumPost.body
+posts[0].ForumPost.created_at
+-->
+
+{% extends 'master.html' %}
+
+        {% block body %}
+
+            {% for message in get_flashed_messages() %}
+                {{ message }}
+            {% endfor %}
+
+<!--sim = Student Teacher Interaction Module-->
+
+<div class="row">
+    <div class="container-fluid">
+        <div>
+            <section id="sim" class="cd-container">
+		<div class="sim-block">
+			<div class="sim-img cd-picture">
+				
+			</div> <!-- sim-img -->
+
+			<div class="sim-content">
+                <!--<h2>Learn this shit</h2>-->
+                <h2> {{ posts[0].User.id }} </h2>
+                <p> Make this </p>
+				<a href="#0" class="cd-read-more">Comment</a>
+				<span class="cd-date">Mar 14</span>
+			</div> <!-- sim-content -->
+		</div> <!-- sim-block -->
+
+		<div class="sim-block">
+			<div class="sim-img cd-movie">
+				
+			</div> <!-- sim-img -->
+
+			<div class="sim-content">
+				<h2>Do this</h2>
+				<p>You kids better do this!</p>
+				<a href="#0" class="cd-read-more">Comment</a>
+				<span class="cd-date">Mar 11</span>
+			</div> <!-- sim-content -->
+		</div> <!-- sim-block -->
+
+		<div class="sim-block">
+			<div class="sim-img cd-picture">
+				
+			</div> <!-- sim-img -->
+
+			<div class="sim-content">
+				<h2>Write this</h2>
+				<p>You kids better write this!</p>
+				<a href="#0" class="cd-read-more">Comment</a>
+				<span class="cd-date">Mar 7</span>
+			</div> <!-- sim-content -->
+		</div> <!-- sim-block -->
+
+		<div class="sim-block">
+			<div class="sim-img cd-location">
+				
+			</div> <!-- sim-img -->
+
+			<div class="sim-content">
+				<h2>Read this</h2>
+				<p>You kids better read this</p>
+				<a href="#0" class="cd-read-more">Comment</a>
+				<span class="cd-date">Mar 4</span>
+			</div> <!-- sim-content -->
+		</div> <!-- sim-block -->
+
+		<div class="sim-block">
+			<div class="sim-img cd-location">
+				
+			</div> <!-- sim-img -->
+
+			<div class="sim-content">
+				<h2>Have fun kids</h2>
+				<p>LOL JK learn!</p>
+				<a href="#0" class="cd-read-more">Comment</a>
+				<span class="cd-date">Feb 28</span>
+			</div> <!-- sim-content -->
+		</div> <!-- sim-block -->
+
+		<div class="sim-block">
+			<div class="sim-img cd-movie">
+				
+			</div> <!-- sim-img -->
+
+			<div class="sim-content">
+				<h2>Nothing here</h2>
+				<p>Sigh! :(</p>
+                <a href="#0" class="cd-read-more">Comment</a>
+				<span class="cd-date">Feb 26</span>
+			</div> <!-- sim-content -->
+		</div> <!-- sim-block -->
+	</section> <!-- sim -->
+        </div>
+    </div>
+</div>
+
+        {% endblock %}
+ 

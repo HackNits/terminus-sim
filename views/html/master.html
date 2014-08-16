@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="">
+        <title>{{ title }}</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="http://127.0.0.1:5000/static/bootstrap.min.css" rel="stylesheet">
+        <link href="http://127.0.0.1:5000/static/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="http://127.0.0.1:5000/static/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="http://127.0.0.1:5000/static/master.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <style>body{padding-top:50px;}.starter-template{padding:40px 15px;text-align:center;}</style>
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+
+    </head>
+
+    <body>
+        <!--Header Nav-->
+        <nav class="navbar navbar-inverse navbar-fixed-top head-nav" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".col1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Terminus</a>
+                </div>
+                <div class="collapse navbar-collapse col1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-bell fa-lg"></i>
+                            </a>
+                            <ul class="dropdown-menu noti-menu" role="menu" aria-label="Notifications">
+                                <li class="nav-header">
+                                    <div class="pull-left">
+                                        Notifications
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="javascript:;">Mark as Read</a>
+                                    </div>
+                                </li>
+                                <hr />
+                                <li><a href="#">Notification 1</a></li>
+                                <li><a href="#">Notification 2</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                        {% if g.user.is_authenticated() %}
+                        <form id="logout" action="{{ url_for('logout') }}" method="POST" accept-charset="utf-8">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        <i class="fa fa-user fa-lg"></i> User 
+                                    </a>
+                                    <ul class="dropdown-menu pro-drop" role="menu" aria-label="Profile Details">
+                                        <li><a href="{{ url_for('profile', userid = current_user.get_id()) }}"><i class="fa fa-beer"></i>   Profile</a></li>
+                                        <li class="log">
+                                                {{ logout_form.csrf_token }}
+                                                <a onclick="sub()"><i class="fa fa-sign-out"></i>   Logout</a>
+
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                         </form>
+                        {% else %}
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        <li><a href="{{ url_for('login') }}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+        
+        <!--Main Nav-->
+        <nav class="navbar navbar-default main-nav navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".col2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse col2">
+                    <ul class="nav navbar-nav main-nav">
+                        <li><a href="{{ url_for('index') }}" class="h4">Home</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle h4" data-toggle="dropdown">Wiki  <i class="fa fa-chevron-circle-down"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url_for('get_wiki_index') }}">Wiki Home</a></li>
+                                <li><a href="{{ url_for('get_all_wiki_pages') }}">Wiki pages</a></li>
+                                <li><a href="{{ url_for('create_wiki_page') }}">Create page</a></li>
+                                {% if name is not none %}
+                                <li><a href="{{ url_for('edit_wiki_page', name=name) }}">Edit current page</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <!--Content-->
+                 {% block body %}{% endblock %}
+        
+        
+       
+        <!--Side Bar-->
+        <!--<div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar">
+                  <ul class="nav nav-sidebar">
+                    <li class="active"><a href="#">Option 1</a></li>
+                    <li><a href="#">Option 2</a></li>
+                    <li><a href="#">Option 3</a></li>
+                    <li><a href="#">Option 4</a></li>
+                  </ul>
+                  <ul class="nav nav-sidebar">
+                    <li><a href="#">Option 5</a></li>
+                    <li><a href="#">Option 6</a></li>
+                    <li><a href="#">Option 7</a></li>
+                    <li><a href="#">Option 8</a></li>
+                    <li><a href="#">Option 9</a></li>
+                  </ul>
+                </div>
+            
+            </div>
+            
+        </div>-->
+        <div id="footer">
+          <div class="container">
+            <p class="text-muted text-center copy">&copy; Copyright 2014 Octalian</p>
+          </div>
+        </div>
+        <script>
+            function sub(){
+                document.getElementById("logout").submit()
+            }
+            
+            $('#sidebar').affix({
+                offset: {
+                top: 245
+                  }
+            });
+
+            var $body   = $(document.body);
+            var navHeight = $('.navbar').outerHeight(true) + 10;
+
+            $body.scrollspy({
+                target: '#leftCol',
+                offset: navHeight
+            });
+        </script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="http://127.0.0.1:5000/static/jquery-1.10.2.min.js"></script>
+        <!-- compiled and minified Bootstrap JavaScript -->
+        <script src="http://127.0.0.1:5000/static/bootstrap.min.js"></script>
+    </body>
+</html>
+
+
+
