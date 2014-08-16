@@ -8,6 +8,16 @@ var config = require('./config.json')[app.get('env')];
 app.set('view engine', 'jade');
 app.set('views', './views');
 
+// MySQL
+/*
+    var mysql = require('mysql');
+    var connection = mysql.createConnection({
+        host: config.db_host,
+        user: config.db_user,
+        password: config.db_pass,
+        database: config.db
+    });
+*/
 // Load the route handlers
 // var routers = require('./routes');
 var home = require('./routes/home');
@@ -37,3 +47,4 @@ http.createServer(app).listen(7777, function() {
 console.log(config.db_host);
 console.log(config.db_user);
 console.log(config.db_pass);
+console.log(config.db);
