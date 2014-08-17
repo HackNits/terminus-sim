@@ -1,8 +1,30 @@
-var http = require('http');
-var express = require('express');
-var app = express();
+var http = require('http'),
+    express = require('express'),
+    app = express(),
+    config = require('./config.json')[app.get('env')];
 
-var config = require('./config.json')[app.get('env')];
+var passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy;
+
+// Passport
+passport.use(new LocalStrategy({
+    // Overriding the default arguments
+    usernameField: 'reg_no',
+    passwordField: 'password',
+    passReqToCallback: true
+    },
+    function(req, reg_no, password, done) {
+        var query = 'SELECt * FROM users WHERE' +
+                    + '`reg_no` = "' + reg_no + '"';
+        connection.query(query, function(err, rows) {
+            if(err)
+                return done(err);
+            if(!rows.length)
+                return done(null, false);
+            return done(null, rows[0]);
+        });
+    }
+));
 
 // App settings
 app.set('view engine', 'jade');
@@ -16,7 +38,10 @@ var connection = mysql.createConnection({
     password: config.db_pass,
     database: config.db
 });
-connection.connect();
+connection.connect(function(err) {
+    if(err) throw err;
+    console.log('Connection created!');
+});
 
 connection.query('SELECT 1', function(err, rows, fields) {
     if(err) {
@@ -34,6 +59,8 @@ var subjects = require('./routes/subjects');
 var subject = require('./routes/subject');
 
 // Middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 app.use('/', home.home);
@@ -43,6 +70,12 @@ app.use('/subjects/', subjects.subjects);
 app.use('/subjects/:code/', subject.subject);
 // app.use('/subjects/:sub_code', forum.);
 // app.use('/subjects/all', forum.);
+app.post('/login/', function(req, res){
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/login'
+    });
+});
 
 http.createServer(app).listen(7777, function() {
     console.log('Server is up!');

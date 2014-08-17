@@ -1,8 +1,8 @@
 var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: 'localhost',
-    user: 'terminus',
-    password: 'terminus',
+    user: 'terminus_sim',
+    password: 'terminus_sim',
     database: 'terminus_sim'
 }, function() {
     console.log('Connection created successfully!');
@@ -58,3 +58,9 @@ classes = [
         "description": "This is some crappy sample description for the subject SUB_014."
     }
 ];
+
+for(var i=0; i<classes.length; i++) {
+    var query = 'INSERT INTO classes (subject_code, description)' +
+    'VALUES ("' + classes[i].subject_code + '", "' + classes[i].description + '")';
+    connection.query(query);
+}
